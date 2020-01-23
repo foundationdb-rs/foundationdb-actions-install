@@ -56,6 +56,7 @@ module.exports = require("os");
 const core = __webpack_require__(470);
 const os = __webpack_require__(87);
 const { execSync } = __webpack_require__(129);
+const { mkdirSync, readFileSync, writeFileSync } = __webpack_require__(747);
 
 function exec(cmd) {
     console.info(`> ${cmd}`);
@@ -78,10 +79,21 @@ try {
             break;
         }
         case 'win32': {
+            const cfg_path = "C:\\ProgramData\\foundationdb\\foundationdb.conf";
             let url = `${base_url}/windows/installers/foundationdb-${version}-x64.msi`;
             exec(`curl -O ${url}`);
             exec(`msiexec /i "foundationdb-${version}-x64.msi" /quiet /passive /norestart /log install.log`);
-            console.log(`::add-path::C:\\Program Files\\foundationdb\\bin`);
+            exec(`net stop fdbmonitor`);
+            mkdirSync("D:\\fdblogs");
+            mkdirSync("D:\\fdbdata");
+            let cfg = readFileSync(cfg_path, "utf8");
+            cfg = cfg.replace(/logdir=.*/g, "logdir=D:\\fdblogs");
+            cfg = cfg.replace(/datadir=.*/g, "datadir=D:\\fdbdata");
+            writeFileSync(cfg_path, cfg, "utf8");
+            console.log(cfg);
+            exec(`net start fdbmonitor`);
+            exec(`C:\\Program Files\\foundationdb\\bin\\fdbcli.exe --exec 'configure new single ssd'`);
+            console.log("::add-path::C:\\Program Files\\foundationdb\\bin");
             break;
         }
         case 'darwin': {
@@ -392,6 +404,13 @@ exports.getState = getState;
 /***/ (function(module) {
 
 module.exports = require("path");
+
+/***/ }),
+
+/***/ 747:
+/***/ (function(module) {
+
+module.exports = require("fs");
 
 /***/ })
 

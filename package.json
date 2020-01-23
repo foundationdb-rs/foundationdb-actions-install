@@ -4,7 +4,7 @@
   "description": "Github Action for installing foundationdb",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js -o dist/index.js"
+    "build": "ncc build index.js -o dist"
   },
   "repository": {
     "type": "git",
