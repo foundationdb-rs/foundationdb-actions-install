@@ -5,7 +5,7 @@ const { mkdirSync, readFileSync, writeFileSync } = require('fs');
 
 function exec(cmd) {
     console.info(`> ${cmd}`);
-    execSync(cmd);
+    execSync(cmd, { stdio: "inherit" });
 }
 
 try {
@@ -35,11 +35,8 @@ try {
             cfg = cfg.replace(/logdir=.*/g, "logdir=D:\\fdblogs");
             cfg = cfg.replace(/datadir=.*/g, "datadir=D:\\fdbdata");
             writeFileSync(cfg_path, cfg, "utf8");
-            console.log(cfg);
             exec(`net start fdbmonitor`);
-            exec(`sleep 5`);
-            exec(`"C:\\Program Files\\foundationdb\\bin\\fdbcli.exe" --exec 'configure new single ssd'`);
-            exec(`sleep 5`);
+            exec(`"C:\\Program Files\\foundationdb\\bin\\fdbcli.exe" --exec "configure new single ssd"`);
             console.log("::add-path::C:\\Program Files\\foundationdb\\bin");
             break;
         }
