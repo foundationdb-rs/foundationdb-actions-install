@@ -1,0 +1,30 @@
+{
+  "name": "foundationdb-actions-install",
+  "version": "1.0.0",
+  "description": "Github Action for installing foundationdb",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js -o dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clikengo/foundationdb-actions-install.git"
+  },
+  "keywords": [
+    "actions",
+    "foundationdb",
+    "install"
+  ],
+  "author": "Vincent Rouillé <v.rouille@clikengo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Clikengo/foundationdb-actions-install/issues"
+  },
+  "homepage": "https://github.com/Clikengo/foundationdb-actions-install#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.5"
+  }
+}

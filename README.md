@@ -1,2 +1,9 @@
 # foundationdb-actions-install
-Github Action for installing foundationdb
+
+This action install foundationdb
+
+## Inputs
+
+### `version`
+
+**Optional** Foundationdb version to install. Default `"6.2.10"`.
