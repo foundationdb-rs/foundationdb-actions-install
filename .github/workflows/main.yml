@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   install_fdb:
-    name: Install foundationdb
+    name: Install
 
     strategy:
       matrix:
