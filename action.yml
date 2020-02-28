@@ -7,7 +7,7 @@ inputs:
   version:
     description: Foundationdb version to install
     required: false
-    default: "6.2.10"
+    default: "6.2.15"
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"

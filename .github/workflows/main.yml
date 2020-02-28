@@ -18,5 +18,4 @@ jobs:
         uses: ./
 
       - name: foundationdb status
-        if: matrix.os == 'windows-latest'
         run: fdbcli --exec status
