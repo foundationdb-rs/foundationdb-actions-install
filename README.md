@@ -6,4 +6,4 @@ This action install foundationdb
 
 ### `version`
 
-**Optional** Foundationdb version to install. Default `"6.2.10"`.
+**Optional** Foundationdb version to install. Default `"6.2.15"`.
