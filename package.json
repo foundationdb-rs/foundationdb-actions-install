@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Clikengo/foundationdb-actions-install#readme",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.6"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.5"
