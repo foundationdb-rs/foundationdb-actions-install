@@ -37,7 +37,7 @@ try {
             writeFileSync(cfg_path, cfg, "utf8");
             exec(`net start fdbmonitor`);
             exec(`"C:\\Program Files\\foundationdb\\bin\\fdbcli.exe" --exec "configure new single ssd"`);
-            console.log("::add-path::C:\\Program Files\\foundationdb\\bin");
+            core.addPath("C:\\Program Files\\foundationdb\\bin");
             break;
         }
         case 'darwin': {
