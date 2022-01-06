@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Clikengo/foundationdb-actions-install.git"
+    "url": "git+https://github.com/foundationdb-rs/foundationdb-actions-install.git"
   },
   "keywords": [
     "actions",
@@ -16,11 +16,15 @@
     "install"
   ],
   "author": "Vincent Rouillé <v.rouille@clikengo.com>",
+  "contributors": [
+    "Pierre Zemb <pierre.zemb.isen@gmail.com>",
+    "Karim Houari <khouari1@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Clikengo/foundationdb-actions-install/issues"
+    "url": "https://github.com/foundationdb-rs/foundationdb-actions-install/issues"
   },
-  "homepage": "https://github.com/Clikengo/foundationdb-actions-install#readme",
+  "homepage": "https://github.com/foundationdb-rs/foundationdb-actions-install#readme",
   "dependencies": {
     "@actions/core": "^1.2.6"
   },
