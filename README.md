@@ -6,7 +6,6 @@ This action is compatible with:
 
 - `ubuntu-latest`
 - `macos-latest`
-- `windows-latest`
 
 ## Inputs
 
