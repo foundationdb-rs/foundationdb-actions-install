@@ -479,9 +479,10 @@ function exec(cmd) {
 
 try {
     const version = core.getInput('version');
-    console.log(`Installing foundationdb ${version} (${os.platform()})!`);
+    let platform = os.platform();
+    console.log(`Installing foundationdb ${version} (${platform})!`);
     let base_url = `https://github.com/apple/foundationdb/releases/download/${version}`;
-    switch (os.platform()) {
+    switch (platform) {
         case 'linux': {
             let client_url = `${base_url}/foundationdb-clients_${version}-1_amd64.deb`;
             exec(`curl -L -O ${client_url}`);
@@ -498,6 +499,9 @@ try {
             exec(`sudo installer -pkg FoundationDB-${version}.pkg -target /`);
             break;
         }
+        default:
+            throw Error(`Unsupported OS platform: ${platform}. Supported options are linux and darwin.`
+            + ` Check that this action is being used with either ubuntu-latest or macos-latest.`);
     }
 
 } catch (error) {
