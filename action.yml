@@ -1,11 +1,11 @@
-name: Install foundationdb
-description: Install foundationdb
+name: Setup foundationDB
+description: Setup a FoundationDB
 branding:
   icon: database
-  color: black
+  color: blue
 inputs:
   version:
-    description: Foundationdb version to install
+    description: FoundationDB version to install
     required: false
     default: "6.3.22"
 runs:
