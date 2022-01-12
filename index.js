@@ -10,42 +10,29 @@ function exec(cmd) {
 
 try {
     const version = core.getInput('version');
-    console.log(`Installing foundationdb ${version} (${os.platform()})!`);
-    let base_url = `https://www.foundationdb.org/downloads/${version}`;
-    switch (os.platform()) {
+    let platform = os.platform();
+    console.log(`Installing foundationdb ${version} (${platform})!`);
+    let base_url = `https://github.com/apple/foundationdb/releases/download/${version}`;
+    switch (platform) {
         case 'linux': {
-            let client_url = `${base_url}/ubuntu/installers/foundationdb-clients_${version}-1_amd64.deb`;
-            exec(`curl -O ${client_url}`);
+            let client_url = `${base_url}/foundationdb-clients_${version}-1_amd64.deb`;
+            exec(`curl -L -O ${client_url}`);
             exec(`sudo dpkg -i foundationdb-clients_${version}-1_amd64.deb`);
 
-            let server_url = `${base_url}/ubuntu/installers/foundationdb-server_${version}-1_amd64.deb`;
-            exec(`curl -O ${server_url}`);
+            let server_url = `${base_url}/foundationdb-server_${version}-1_amd64.deb`;
+            exec(`curl -L -O ${server_url}`);
             exec(`sudo dpkg -i foundationdb-server_${version}-1_amd64.deb`);
             break;
         }
-        case 'win32': {
-            const cfg_path = "C:\\ProgramData\\foundationdb\\foundationdb.conf";
-            let url = `${base_url}/windows/installers/foundationdb-${version}-x64.msi`;
-            exec(`curl -O ${url}`);
-            exec(`msiexec /i "foundationdb-${version}-x64.msi" /quiet /passive /norestart /log install.log`);
-            exec(`net stop fdbmonitor`);
-            mkdirSync("D:\\fdblogs");
-            mkdirSync("D:\\fdbdata");
-            let cfg = readFileSync(cfg_path, "utf8");
-            cfg = cfg.replace(/logdir=.*/g, "logdir=D:\\fdblogs");
-            cfg = cfg.replace(/datadir=.*/g, "datadir=D:\\fdbdata");
-            writeFileSync(cfg_path, cfg, "utf8");
-            exec(`net start fdbmonitor`);
-            exec(`"C:\\Program Files\\foundationdb\\bin\\fdbcli.exe" --exec "configure new single ssd"`);
-            core.addPath("C:\\Program Files\\foundationdb\\bin");
-            break;
-        }
         case 'darwin': {
-            let url = `${base_url}/macOS/installers/FoundationDB-${version}.pkg`;
-            exec(`curl -O ${url}`);
+            let url = `${base_url}/FoundationDB-${version}.pkg`;
+            exec(`curl -L -O ${url}`);
             exec(`sudo installer -pkg FoundationDB-${version}.pkg -target /`);
             break;
         }
+        default:
+            throw Error(`Unsupported OS platform: ${platform}. Supported options are linux and darwin.`
+            + ` Check that this action is being used with either ubuntu-latest or macos-latest.`);
     }
 
 } catch (error) {
