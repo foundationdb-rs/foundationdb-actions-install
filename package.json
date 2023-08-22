@@ -1,6 +1,6 @@
 {
   "name": "foundationdb-actions-install",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Github Action for installing foundationDB",
   "main": "index.js",
   "scripts": {
@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/foundationdb-rs/foundationdb-actions-install#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.10.0"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.20.5"
+    "@vercel/ncc": "^0.36.1"
   }
 }

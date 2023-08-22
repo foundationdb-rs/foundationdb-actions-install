@@ -25,9 +25,9 @@ try {
             break;
         }
         case 'darwin': {
-            let url = `${base_url}/FoundationDB-${version}.pkg`;
+            let url = `${base_url}/FoundationDB-${version}_x86_64.pkg`;
             exec(`curl -L -O ${url}`);
-            exec(`sudo installer -pkg FoundationDB-${version}.pkg -target /`);
+            exec(`sudo installer -pkg FoundationDB-${version}_x86_64.pkg -target /`);
             break;
         }
         default:
