@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 453:
+/***/ 351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -15,7 +15,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(375);
+const utils_1 = __nccwpck_require__(278);
 /**
  * Commands
  *
@@ -87,7 +87,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 115:
+/***/ 186:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -109,9 +109,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const command_1 = __nccwpck_require__(453);
-const file_command_1 = __nccwpck_require__(403);
-const utils_1 = __nccwpck_require__(375);
+const command_1 = __nccwpck_require__(351);
+const file_command_1 = __nccwpck_require__(717);
+const utils_1 = __nccwpck_require__(278);
 const os = __importStar(__nccwpck_require__(37));
 const path = __importStar(__nccwpck_require__(17));
 /**
@@ -332,7 +332,7 @@ exports.getState = getState;
 
 /***/ }),
 
-/***/ 403:
+/***/ 717:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -350,7 +350,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(147));
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(375);
+const utils_1 = __nccwpck_require__(278);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -368,7 +368,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 375:
+/***/ 278:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -467,7 +467,7 @@ module.exports = require("path");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(115);
+const core = __nccwpck_require__(186);
 const os = __nccwpck_require__(37);
 const { execSync } = __nccwpck_require__(81);
 const { mkdirSync, readFileSync, writeFileSync } = __nccwpck_require__(147);
@@ -494,9 +494,9 @@ try {
             break;
         }
         case 'darwin': {
-            let url = `${base_url}/FoundationDB-${version}.pkg`;
+            let url = `${base_url}/FoundationDB-${version}_x86_64.pkg`;
             exec(`curl -L -O ${url}`);
-            exec(`sudo installer -pkg FoundationDB-${version}.pkg -target /`);
+            exec(`sudo installer -pkg FoundationDB-${version}_x86_64.pkg -target /`);
             break;
         }
         default:

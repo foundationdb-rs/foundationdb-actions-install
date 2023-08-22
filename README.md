@@ -11,4 +11,4 @@ This action is compatible with:
 
 ### `version`
 
-**Optional** Foundationdb version to install. Default `"6.3.22"`.
+**Optional** Foundationdb version to install. Default `"7.1.37"`.
