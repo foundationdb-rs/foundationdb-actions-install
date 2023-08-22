@@ -7,7 +7,7 @@ inputs:
   version:
     description: FoundationDB version to install
     required: false
-    default: "6.3.37"
+    default: "7.1.37"
 runs:
   using: "node16"
   main: "dist/index.js"
