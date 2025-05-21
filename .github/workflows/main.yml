@@ -6,11 +6,24 @@ on:
 
 jobs:
   install_fdb:
-    name: Install
+    name: Install FDB ${{ matrix.fdb_version }} on ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-13]
+        include:
+          # macOS test variations
+          - os: macos-13
+            fdb_version: '7.3.66'
+          - os: macos-14
+            fdb_version: '7.3.66'
+
+          # Linux test variations
+          - os: ubuntu-latest
+            fdb_version: '6.3.25'
+          - os: ubuntu-latest
+            fdb_version: '7.1.59'
+          - os: ubuntu-latest
+            fdb_version: '7.3.66'
 
     runs-on: ${{ matrix.os }}
 
