@@ -3,6 +3,7 @@ on:
     branches:
     - main
   pull_request:
+  workflow_dispatch:
 
 jobs:
   install_fdb:
@@ -11,10 +12,11 @@ jobs:
     strategy:
       matrix:
         include:
-          # macOS test variations
-          - os: macos-13
+          # macOS test variations (ARM64)
+          - os: macos-15
             fdb_version: '7.3.66'
-          - os: macos-14
+          # macOS test variations (Intel x86_64)
+          - os: macos-15-intel
             fdb_version: '7.3.66'
 
           # Linux test variations
@@ -33,6 +35,36 @@ jobs:
 
       - name: Install FoundationDB
         uses: ./
+        with:
+          version: ${{ matrix.fdb_version }}
 
       - name: foundationdb status
         run: fdbcli --exec status
+
+      - name: Debug - Check FDB installation
+        run: |
+          echo "=== Checking FDB library locations ==="
+          ls -la /usr/local/lib/libfdb* 2>/dev/null || echo "Not in /usr/local/lib"
+          ls -la /usr/lib/libfdb* 2>/dev/null || echo "Not in /usr/lib"
+
+          echo "=== Checking pkg-config ==="
+          pkg-config --libs foundationclient 2>/dev/null || echo "pkg-config not available for foundationclient"
+
+          echo "=== macOS specific checks ==="
+          if [[ "$OSTYPE" == "darwin"* ]]; then
+            echo "--- Frameworks ---"
+            ls -la /Library/Frameworks/ | grep -i fdb || echo "No FDB frameworks"
+            echo "--- Headers ---"
+            ls -la /usr/local/include/foundationdb/ 2>/dev/null || echo "No headers in /usr/local/include/foundationdb"
+            echo "--- dylib search paths ---"
+            echo "DYLD_LIBRARY_PATH: $DYLD_LIBRARY_PATH"
+            echo "LIBRARY_PATH: $LIBRARY_PATH"
+            echo "--- Find all libfdb files ---"
+            find /usr/local /Library -name "*fdb*" -type f 2>/dev/null || echo "No fdb files found"
+          fi
+
+          echo "=== Linux specific checks ==="
+          if [[ "$OSTYPE" == "linux"* ]]; then
+            ldconfig -p | grep fdb || echo "No fdb in ldconfig"
+            dpkg -L foundationdb-clients 2>/dev/null | head -20 || echo "Package not found"
+          fi
